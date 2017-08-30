@@ -9,10 +9,12 @@ class Calculator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bench1rm: false,
-      deadlift1rm: false,
-      squat1rm: false,
-      ohp1rm: false,
+      oneRepMax: {
+        bench: false,
+        deadlift: false,
+        squats: false,
+        ohp: false,
+      },
       submitted: false,
     }
 
@@ -25,25 +27,37 @@ class Calculator extends Component {
 
   updateBench(event) {
     this.setState({
-      bench1rm: event.target.value,
+      oneRepMax: {
+        ...this.state.oneRepMax,
+        bench: event.target.value,
+      }
     });
   };
 
   updateSquats(event) {
     this.setState({
-      squats1rm: event.target.value,
+      oneRepMax: {
+        ...this.state.oneRepMax,
+        squats: event.target.value,
+      }
     });
   };
 
   updateDeadlift(event) {
     this.setState({
-      deadlift1rm: event.target.value,
+      oneRepMax: {
+        ...this.state.oneRepMax,
+        deadlift: event.target.value,
+      }
     });
   };
 
   updateOhp(event) {
     this.setState({
-      ohp1rm: event.target.value,
+      oneRepMax: {
+        ...this.state.oneRepMax,
+        ohp: event.target.value,
+      }
     });
   };
 
@@ -60,13 +74,13 @@ class Calculator extends Component {
         { !this.state.submitted ?
         <section>
           <label>
-            <span>Bench Press 1RM</span>
-            <input onChange={this.updateBench} min="1" max="300" type="number" id="orm-deadlift" />
+            <span>Squats 1RM</span>
+            <input onChange={this.updateSquats} min="1" max="300" type="number" id="orm-squat" />
           </label>
 
           <label>
-            <span>Squats 1RM</span>
-            <input onChange={this.updateSquats} min="1" max="300" type="number" id="orm-squat" />
+            <span>Bench Press 1RM</span>
+            <input onChange={this.updateBench} min="1" max="300" type="number" id="orm-deadlift" />
           </label>
 
           <label>
@@ -84,10 +98,10 @@ class Calculator extends Component {
           </button>
         </section> :
         <section>
-          <Week weekNumber="1" />
-          <Week weekNumber="2" />
-          <Week weekNumber="3" />
-          <Week weekNumber="4" />
+          <Week weekNumber={1} orm={this.state.oneRepMax} />
+          <Week weekNumber={2} orm={this.state.oneRepMax} />
+          <Week weekNumber={3} orm={this.state.oneRepMax} />
+          <Week weekNumber={4} orm={this.state.oneRepMax} />
         </section>
         }
       </div>
