@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import 'normalize.css';
+
 import Calculator from './Calculator/Calculator.js';
 
 import './App.css';

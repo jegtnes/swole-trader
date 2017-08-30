@@ -1,0 +1,23 @@
+.calculator label {
+  display: block;
+  clear: both;
+  padding: 10px 0;
+  overflow: auto;
+}
+
+.calculator span {
+  float: left;
+}
+
+.calculator input {
+  float: right;
+  width: 50px;
+}
+
+.calculator button {
+  margin: 20px 0;
+  background: none;
+  border: 2px solid hotpink;
+  color: hotpink;
+  padding: 5px;
+}
