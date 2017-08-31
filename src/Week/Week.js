@@ -10,7 +10,7 @@ class Week extends Component {
 
 
   round(value) {
-    return (Math.ceil(value / 1.25) * 1.25);
+    return (Math.ceil(value / 2.5) * 2.5);
   }
 
   modifier(weekNumber, setNumber) {
@@ -60,48 +60,48 @@ class Week extends Component {
       <div className="week">
         <h2>Hi this is week {this.props.weekNumber}.</h2>
         <div>
-          <h3>Day 1: Squats (1RM: {this.props.orm.squats})</h3>
+          <h3>Day 1: Squats (1RM: {this.props.squats})</h3>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
               {val}&nbsp;
-              { this.round(this.props.orm.squats * this.modifier(this.props.weekNumber, i+1)) }kg
+              { this.round(this.props.squats * this.modifier(this.props.weekNumber, i+1)) }kg
             </li>
           })}
           </ol>
         </div>
         <hr />
         <div>
-          <h3>Day 2: Bench Press (1RM: {this.props.orm.bench})</h3>
+          <h3>Day 2: Bench Press (1RM: {this.props.bench})</h3>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
               {val}&nbsp;
-              {this.round(this.props.orm.bench * this.modifier(this.props.weekNumber, i+1)) }kg
+              {this.round(this.props.bench * this.modifier(this.props.weekNumber, i+1)) }kg
             </li>
           })}
           </ol>
         </div>
         <hr />
         <div>
-          <h3>Day 3: Deadlifts (1RM: {this.props.orm.deadlift})</h3>
+          <h3>Day 3: Deadlifts (1RM: {this.props.deadlift})</h3>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
               {val}&nbsp;
-              {this.round(this.props.orm.deadlift * this.modifier(this.props.weekNumber, i+1)) }kg
+              {this.round(this.props.deadlift * this.modifier(this.props.weekNumber, i+1)) }kg
             </li>
           })}
           </ol>
         </div>
         <hr />
         <div>
-          <h3>Day 4: Overhead Press (1RM: {this.props.orm.ohp})</h3>
+          <h3>Day 4: Overhead Press (1RM: {this.props.ohp})</h3>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
               {val}&nbsp;
-              {this.round(this.props.orm.ohp * this.modifier(this.props.weekNumber, i+1)) }kg
+              {this.round(this.props.ohp * this.modifier(this.props.weekNumber, i+1)) }kg
             </li>
           })}
           </ol>

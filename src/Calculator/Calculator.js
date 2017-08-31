@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Week from '../Week/Week';
+import LocalForage from 'localforage';
 
 import './Calculator.css';
 
@@ -8,13 +9,12 @@ class Calculator extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      oneRepMax: {
-        bench: false,
-        deadlift: false,
-        squats: false,
-        ohp: false,
-      },
+      bench: false,
+      deadlift: false,
+      squats: false,
+      ohp: false,
       submitted: false,
     }
 
@@ -23,49 +23,65 @@ class Calculator extends Component {
     this.updateDeadlift = this.updateDeadlift.bind(this);
     this.updateOhp = this.updateOhp.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.clearState = this.clearState.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      bench: nextProps.bench ? nextProps.bench : false,
+      deadlift: nextProps.deadlift ? nextProps.deadlift : false,
+      squats: nextProps.squats ? nextProps.squats : false,
+      ohp: nextProps.ohp ? nextProps.ohp : false,
+      submitted: nextProps.submitted ? nextProps.submitted : false,
+    });
   }
 
   updateBench(event) {
     this.setState({
-      oneRepMax: {
-        ...this.state.oneRepMax,
-        bench: event.target.value,
-      }
+      bench: event.target.value,
     });
   };
 
   updateSquats(event) {
     this.setState({
-      oneRepMax: {
-        ...this.state.oneRepMax,
-        squats: event.target.value,
-      }
+      squats: event.target.value,
     });
   };
 
   updateDeadlift(event) {
     this.setState({
-      oneRepMax: {
-        ...this.state.oneRepMax,
-        deadlift: event.target.value,
-      }
+      deadlift: event.target.value,
     });
   };
 
   updateOhp(event) {
     this.setState({
-      oneRepMax: {
-        ...this.state.oneRepMax,
-        ohp: event.target.value,
-      }
+      ohp: event.target.value,
     });
   };
 
   updateState() {
-    this.setState({
-      submitted: true,
-    })
-    console.log(this.state);
+    const cheatingState = this.state;
+    const that = this;
+    cheatingState.submitted = true;
+    LocalForage.setItem('data', cheatingState, (err) => {
+      LocalForage.getItem('data', (err, val) => {
+        that.setState({submitted: true});
+      });
+    });
+  };
+
+  clearState() {
+    const that = this;
+    LocalForage.removeItem('data', (err) => {
+      that.setState({
+        bench: false,
+        deadlift: false,
+        squats: false,
+        ohp: false,
+        submitted: false,
+      });
+    });
   };
 
   render() {
@@ -98,10 +114,11 @@ class Calculator extends Component {
           </button>
         </section> :
         <section>
-          <Week weekNumber={1} orm={this.state.oneRepMax} />
-          <Week weekNumber={2} orm={this.state.oneRepMax} />
-          <Week weekNumber={3} orm={this.state.oneRepMax} />
-          <Week weekNumber={4} orm={this.state.oneRepMax} />
+          <button onClick={this.clearState}>Reset gains pls!</button>
+          <Week weekNumber={1} {...this.state} />
+          <Week weekNumber={2} {...this.state} />
+          <Week weekNumber={3} {...this.state} />
+          <Week weekNumber={4} {...this.state} />
         </section>
         }
       </div>
