@@ -5,7 +5,7 @@
   overflow: auto;
 }
 
-.calculator span {
+.calculator label span {
   float: left;
 }
 

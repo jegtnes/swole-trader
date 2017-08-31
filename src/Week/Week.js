@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './Week.css';
+
 class Week extends Component {
 
   constructor() {
@@ -64,8 +66,8 @@ class Week extends Component {
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
-              {val}&nbsp;
-              { this.round(this.props.squats * this.modifier(this.props.weekNumber, i+1)) }kg
+              <span className="lifts">{val}&nbsp;</span>
+              <span className="weight">{ this.round(this.props.squats * this.modifier(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -76,8 +78,8 @@ class Week extends Component {
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
-              {val}&nbsp;
-              {this.round(this.props.bench * this.modifier(this.props.weekNumber, i+1)) }kg
+              <span className="lifts">{val}&nbsp;</span>
+              <span className="weight">{this.round(this.props.bench * this.modifier(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -88,8 +90,8 @@ class Week extends Component {
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
-              {val}&nbsp;
-              {this.round(this.props.deadlift * this.modifier(this.props.weekNumber, i+1)) }kg
+              <span className="lifts">{val}&nbsp;</span>
+              <span className="weight">{this.round(this.props.deadlift * this.modifier(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -100,8 +102,8 @@ class Week extends Component {
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
-              {val}&nbsp;
-              {this.round(this.props.ohp * this.modifier(this.props.weekNumber, i+1)) }kg
+              <span className="lifts">{val}&nbsp;</span>
+              <span className="weight">{this.round(this.props.ohp * this.modifier(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
