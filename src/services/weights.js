@@ -11,6 +11,11 @@ function percentageLift(weekNumber, setNumber) {
     return false;
   }
 
+  if (setNumber < 1) {
+    console.warn("You must have at least one set in a week");
+    return false;
+  }
+
   if (weekNumber > 4 || weekNumber < 1) {
     console.warn("The week number must be between 1 and 4");
     return false;

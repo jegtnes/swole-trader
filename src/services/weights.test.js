@@ -6,6 +6,30 @@ it('fails if not passed the correct parameters', () => {
   expect(percentageLift(false,2)).toEqual(false);
 });
 
+it("doesn't return percentages for >3 or < 1 sets on week 4", () => {
+  expect(percentageLift(4, 4)).toEqual(false);
+  expect(percentageLift(4, 10)).toEqual(false);
+  expect(percentageLift(4, 2000)).toEqual(false);
+  expect(percentageLift(4, 0)).toEqual(false);
+  expect(percentageLift(4, -1)).toEqual(false);
+  expect(percentageLift(4, -9001)).toEqual(false);
+});
+
+it("doesn't return percentages for > 6 or < 1 sets on weeks 1-3", () => {
+  expect(percentageLift(1, 666)).toEqual(false);
+  expect(percentageLift(2, 7)).toEqual(false);
+  expect(percentageLift(3, 2000)).toEqual(false);
+  expect(percentageLift(3, 0)).toEqual(false);
+  expect(percentageLift(2, -9001)).toEqual(false);
+  expect(percentageLift(1, -666)).toEqual(false);
+});
+
+it("fails on weeks out of bounds", () => {
+  expect(percentageLift(-1, 1)).toEqual(false);
+  expect(percentageLift(0, 1)).toEqual(false);
+  expect(percentageLift(5, 1)).toEqual(false);
+});
+
 it('returns the correct percentages for week 1', () => {
   expect(percentageLift(1, 1)).toEqual(0.4);
   expect(percentageLift(1, 2)).toEqual(0.5);
@@ -37,22 +61,4 @@ it('returns the correct percentages for week 4', () => {
   expect(percentageLift(4, 1)).toEqual(0.4);
   expect(percentageLift(4, 2)).toEqual(0.5);
   expect(percentageLift(4, 3)).toEqual(0.6);
-});
-
-it("doesn't return percentages for more than 3 sets on week 4", () => {
-  expect(percentageLift(4, 4)).toEqual(false);
-  expect(percentageLift(4, 10)).toEqual(false);
-  expect(percentageLift(4, 2000)).toEqual(false);
-});
-
-it("doesn't return percentages for more than 6 sets on weeks 1-3", () => {
-  expect(percentageLift(1, 666)).toEqual(false);
-  expect(percentageLift(2, 7)).toEqual(false);
-  expect(percentageLift(3, 2000)).toEqual(false);
-});
-
-it("fails on weeks out of bounds", () => {
-  expect(percentageLift(-1, 1)).toEqual(false);
-  expect(percentageLift(0, 1)).toEqual(false);
-  expect(percentageLift(5, 1)).toEqual(false);
 });
