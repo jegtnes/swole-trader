@@ -2,7 +2,12 @@ function percentageLift(weekNumber, setNumber) {
   var percentage = 40;
 
   if (!weekNumber || !setNumber) {
-    console.error('You must specify both a week number and a set number');
+    console.warn('You must specify both a week number and a set number');
+    return false;
+  }
+
+  if (setNumber > 6 || (setNumber > 3 && weekNumber === 4)) {
+    console.warn("You can't have more than 6 set in a week, or 3 on the last week");
     return false;
   }
 
