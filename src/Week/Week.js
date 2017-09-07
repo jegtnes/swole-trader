@@ -1,45 +1,18 @@
 import React, { Component } from 'react';
 
+import { percentageLift } from '../services/weights';
+
 import './Week.css';
 
 class Week extends Component {
 
   constructor() {
     super();
-    this.modifier = this.modifier.bind(this);
     this.round = this.round.bind(this);
   }
 
-
   round(value) {
     return (Math.ceil(value / 2.5) * 2.5);
-  }
-
-  modifier(weekNumber, setNumber) {
-    var base = 40;
-    var num = base;
-    switch (weekNumber) {
-      case 1:
-      case 2:
-      case 3:
-
-        num += (weekNumber * 5) -5;
-
-        if (setNumber >= 2) num += 10;
-        if (setNumber >= 3) num += 10;
-        if (setNumber >= 4) num += 5;
-        if (setNumber >= 5) num += 10;
-        if (setNumber === 6) num += 10;
-        return num / 100;
-
-      case 4:
-        if (setNumber >= 2) num += 10;
-        if (setNumber >= 3) num += 10;
-        return num / 100;
-
-      default:
-        break;
-    }
   }
 
   render() {
@@ -67,7 +40,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{ this.round(this.props.squats * this.modifier(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{ this.round(this.props.squats * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -79,7 +52,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{this.round(this.props.bench * this.modifier(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{this.round(this.props.bench * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -91,7 +64,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{this.round(this.props.deadlift * this.modifier(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{this.round(this.props.deadlift * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -103,7 +76,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{this.round(this.props.ohp * this.modifier(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{this.round(this.props.ohp * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
