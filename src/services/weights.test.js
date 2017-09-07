@@ -50,3 +50,9 @@ it("doesn't return percentages for more than 6 sets on weeks 1-3", () => {
   expect(percentageLift(2, 7)).toEqual(false);
   expect(percentageLift(3, 2000)).toEqual(false);
 });
+
+it("fails on weeks out of bounds", () => {
+  expect(percentageLift(-1, 1)).toEqual(false);
+  expect(percentageLift(0, 1)).toEqual(false);
+  expect(percentageLift(5, 1)).toEqual(false);
+});

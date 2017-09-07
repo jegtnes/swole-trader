@@ -11,6 +11,11 @@ function percentageLift(weekNumber, setNumber) {
     return false;
   }
 
+  if (weekNumber > 4 || weekNumber < 1) {
+    console.warn("The week number must be between 1 and 4");
+    return false;
+  }
+
   if (weekNumber === 4) {
     if (setNumber >= 2) percentage += 10;
     if (setNumber >= 3) percentage += 10;
