@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 
 import { percentageLift } from '../services/weights';
+import { round } from '../services/round';
 
 import './Week.css';
 
 class Week extends Component {
-
-  constructor() {
-    super();
-    this.round = this.round.bind(this);
-  }
-
-  round(value) {
-    return (Math.ceil(value / 2.5) * 2.5);
-  }
 
   render() {
     let numbers = ["5x", "5x"];
@@ -40,7 +32,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{ this.round(this.props.squats * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{ round(this.props.squats * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -52,7 +44,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{this.round(this.props.bench * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{round(this.props.bench * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -64,7 +56,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{this.round(this.props.deadlift * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{round(this.props.deadlift * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -76,7 +68,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{this.round(this.props.ohp * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{round(this.props.ohp * percentageLift(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
