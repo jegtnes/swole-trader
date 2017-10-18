@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Week from '../Week/Week';
 import LocalForage from 'localforage';
 
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 import './Calculator.css';
 
 class Calculator extends Component {
@@ -115,10 +117,26 @@ class Calculator extends Component {
         </section> :
         <section>
           <button onClick={this.clearState}>Reset gains pls!</button>
-          <Week weekNumber={1} {...this.state} />
-          <Week weekNumber={2} {...this.state} />
-          <Week weekNumber={3} {...this.state} />
-          <Week weekNumber={4} {...this.state} />
+          <Tabs>
+            <TabList>
+              <Tab>Week 1</Tab>
+              <Tab>Week 2</Tab>
+              <Tab>Week 3</Tab>
+              <Tab>Week 4</Tab>
+            </TabList>
+            <TabPanel>
+              <Week weekNumber={1} {...this.state} />
+            </TabPanel>
+            <TabPanel>
+              <Week weekNumber={2} {...this.state} />
+            </TabPanel>
+            <TabPanel>
+              <Week weekNumber={3} {...this.state} />
+            </TabPanel>
+            <TabPanel>
+              <Week weekNumber={4} {...this.state} />
+            </TabPanel>
+          </Tabs>
         </section>
         }
       </div>
