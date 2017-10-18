@@ -8,4 +8,9 @@
 .tabs__tab {
   flex: 1 0 auto;
   text-align: center;
+  color: #777777;
+}
+
+.tabs__tab--selected {
+  color: #111111;
 }

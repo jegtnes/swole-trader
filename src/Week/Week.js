@@ -25,9 +25,8 @@ class Week extends Component {
 
     return (
       <div className="week">
-        <h2>Hi this is week {this.props.weekNumber}.</h2>
         <div>
-          <h3>Day 1: Squats (1RM: {this.props.squats})</h3>
+          <h2>Day 1: Squats</h2>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
@@ -39,7 +38,7 @@ class Week extends Component {
         </div>
         <hr />
         <div>
-          <h3>Day 2: Bench Press (1RM: {this.props.bench})</h3>
+          <h2>Day 2: Bench Press</h2>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
@@ -51,7 +50,7 @@ class Week extends Component {
         </div>
         <hr />
         <div>
-          <h3>Day 3: Deadlifts (1RM: {this.props.deadlift})</h3>
+          <h2>Day 3: Deadlifts</h2>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
@@ -63,7 +62,7 @@ class Week extends Component {
         </div>
         <hr />
         <div>
-          <h3>Day 4: Overhead Press (1RM: {this.props.ohp})</h3>
+          <h2>Day 4: Overhead Press</h2>
           <ol>
           {numbers.map((val, i) => {
             return <li key={i}>
