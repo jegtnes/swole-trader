@@ -6,6 +6,7 @@ import LocalForage from 'localforage';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import './Calculator.css';
+import '../Global/Tabs.css';
 
 class Calculator extends Component {
 
@@ -116,27 +117,51 @@ class Calculator extends Component {
           </button>
         </section> :
         <section>
-          <button onClick={this.clearState}>Reset gains pls!</button>
-          <Tabs>
-            <TabList>
-              <Tab>Week 1</Tab>
-              <Tab>Week 2</Tab>
-              <Tab>Week 3</Tab>
-              <Tab>Week 4</Tab>
+          <Tabs
+            className='tabs tabs--week'
+            selectedTabClassName='tabs__tab--selected'
+            selectedTabPanelClassName='tabs__panel--selected'>
+
+            <TabList className='tabs__tab-list'>
+              <Tab className='tabs__tab'>
+                <span className='tabs--week__text'>Week</span>
+                <strong className='tabs--week__number'>1</strong>
+              </Tab>
+
+              <Tab className='tabs__tab'>
+                <span className='tabs--week__text'>Week</span>
+                <strong className='tabs--week__number'>2</strong>
+              </Tab>
+
+              <Tab className='tabs__tab'>
+                <span className='tabs--week__text'>Week</span>
+                <strong className='tabs--week__number'>3</strong>
+              </Tab>
+
+              <Tab className='tabs__tab'>
+                <span className='tabs--week__text'>Week</span>
+                <strong className='tabs--week__number'>4</strong>
+              </Tab>
             </TabList>
-            <TabPanel>
+
+            <TabPanel className='tabs__panel'>
               <Week weekNumber={1} {...this.state} />
             </TabPanel>
-            <TabPanel>
+
+            <TabPanel className='tabs__panel'>
               <Week weekNumber={2} {...this.state} />
             </TabPanel>
-            <TabPanel>
+
+            <TabPanel className='tabs__panel'>
               <Week weekNumber={3} {...this.state} />
             </TabPanel>
-            <TabPanel>
+
+            <TabPanel className='tabs__panel'>
               <Week weekNumber={4} {...this.state} />
             </TabPanel>
           </Tabs>
+
+          <button onClick={this.clearState}>Reset gains pls!</button>
         </section>
         }
       </div>

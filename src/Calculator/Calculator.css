@@ -21,3 +21,16 @@
   color: hotpink;
   padding: 5px;
 }
+
+.tabs--week__text {
+  display: block;
+  text-transform: lowercase;
+  font-weight: 100;
+  font-size: 12px;
+}
+
+.tabs--week__number {
+  display: block;
+  font-weight: 900;
+  font-size: 20px;
+}
