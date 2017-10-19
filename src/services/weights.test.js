@@ -1,4 +1,4 @@
-import { generateRepIntensity } from './weights';
+import { generateRepIntensity, generateSets } from './weights';
 
 describe('generateRepIntensity', () => {
   it('fails if not passed the correct parameters', () => {
@@ -62,5 +62,23 @@ describe('generateRepIntensity', () => {
     expect(generateRepIntensity(4, 1)).toEqual(0.4);
     expect(generateRepIntensity(4, 2)).toEqual(0.5);
     expect(generateRepIntensity(4, 3)).toEqual(0.6);
+  });
+})
+
+describe('generateSets', () => {
+  it('generates the correct sets for week 1', () => {
+    expect(generateSets(1)).toEqual(['5x', '5x', '3x', '5x', '5x', '5+']);
+  });
+
+  it('generates the correct sets for week 2', () => {
+    expect(generateSets(2)).toEqual(['5x', '5x', '3x', '3x', '3x', '3+']);
+  });
+
+  it('generates the correct sets for week 3', () => {
+    expect(generateSets(3)).toEqual(['5x', '5x', '3x', '5x', '3x', '1+']);
+  });
+
+  it('generates the correct sets for week 4', () => {
+    expect(generateSets(4)).toEqual(['5x', '5x', '5x']);
   });
 })

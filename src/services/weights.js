@@ -38,4 +38,8 @@ function generateRepIntensity(weekNumber, setNumber) {
   return percentage / 100;
 }
 
-export { generateRepIntensity }
+function generateSets() {
+  return [];
+}
+
+export { generateRepIntensity, generateSets }
