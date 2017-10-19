@@ -38,8 +38,24 @@ function generateRepIntensity(weekNumber, setNumber) {
   return percentage / 100;
 }
 
-function generateSets() {
-  return [];
+function generateSets(weekNumber) {
+  let sets = ["5x", "5x"];
+
+  if (weekNumber === 4) {
+    sets.push("5x");
+  } else {
+    sets.push("3x");
+
+    if (weekNumber === 1) {
+      sets.push("5x", "5x", "5+");
+    } else if (weekNumber === 2) {
+      sets.push("3x", "3x", "3+");
+    } else if (weekNumber === 3) {
+      sets.push("5x", "3x", "1+");
+    }
+  }
+
+  return sets;
 }
 
 export { generateRepIntensity, generateSets }
