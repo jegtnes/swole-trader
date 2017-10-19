@@ -1,4 +1,4 @@
-function percentageLift(weekNumber, setNumber) {
+function generateRepIntensity(weekNumber, setNumber) {
   var percentage = 40;
 
   if (!weekNumber || !setNumber) {
@@ -38,4 +38,4 @@ function percentageLift(weekNumber, setNumber) {
   return percentage / 100;
 }
 
-export { percentageLift }
+export { generateRepIntensity }

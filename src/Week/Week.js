@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { percentageLift } from '../services/weights';
+import { generateRepIntensity } from '../services/weights';
 import { round } from '../services/round';
 
 import './Week.css';
@@ -31,7 +31,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{ round(this.props.squats * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{ round(this.props.squats * generateRepIntensity(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -43,7 +43,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{round(this.props.bench * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{round(this.props.bench * generateRepIntensity(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -55,7 +55,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{round(this.props.deadlift * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{round(this.props.deadlift * generateRepIntensity(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
@@ -67,7 +67,7 @@ class Week extends Component {
           {numbers.map((val, i) => {
             return <li key={i}>
               <span className="lifts">{val}&nbsp;</span>
-              <span className="weight">{round(this.props.ohp * percentageLift(this.props.weekNumber, i+1)) }kg</span>
+              <span className="weight">{round(this.props.ohp * generateRepIntensity(this.props.weekNumber, i+1)) }kg</span>
             </li>
           })}
           </ol>
