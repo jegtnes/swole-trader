@@ -19,12 +19,15 @@ class Calculator extends Component {
       squats: false,
       ohp: false,
       submitted: false,
+      unit: false,
+      roundingFactor: false,
     }
 
     this.updateBench = this.updateBench.bind(this);
     this.updateSquats = this.updateSquats.bind(this);
     this.updateDeadlift = this.updateDeadlift.bind(this);
     this.updateOhp = this.updateOhp.bind(this);
+    this.updateUnit = this.updateUnit.bind(this);
     this.updateState = this.updateState.bind(this);
     this.clearState = this.clearState.bind(this);
   }
@@ -36,6 +39,8 @@ class Calculator extends Component {
       squats: nextProps.squats ? nextProps.squats : false,
       ohp: nextProps.ohp ? nextProps.ohp : false,
       submitted: nextProps.submitted ? nextProps.submitted : false,
+      unit: nextProps.unit ? nextProps.unit : false,
+      roundingFactor: nextProps.roundingFactor ? nextProps.roundingFactor : false,
     });
   }
 
@@ -63,6 +68,13 @@ class Calculator extends Component {
     });
   };
 
+  updateUnit(event) {
+    this.setState({
+      unit: event.target.value,
+      roundingFactor: event.target.value === 'kg' ? 2.5 : 5,
+    });
+  };
+
   updateState() {
     const cheatingState = this.state;
     const that = this;
@@ -83,6 +95,7 @@ class Calculator extends Component {
         squats: false,
         ohp: false,
         submitted: false,
+        unit: false,
       });
     });
   };
@@ -111,6 +124,18 @@ class Calculator extends Component {
             <span>Overhead Press 1RM</span>
             <input onChange={this.updateOhp} min="1" max="300" type="number" id="orm-ohp" />
           </label>
+
+          <fieldset>
+            <legend>Units of preference?</legend>
+            <label>
+              <span>Metric (kg)</span>
+              <input onChange={this.updateUnit} id="unit-metric" name="unit" type="radio" value="kg" />
+            </label>
+            <label>
+              <span>Imperial (lbs)</span>
+              <input onChange={this.updateUnit} id="unit-imperial" name="unit" type="radio" value="lbs" />
+            </label>
+          </fieldset>
 
           <button onClick={this.updateState}>
             HIT ME WITH YOUR RHYTHM STICK. HIT ME, HIT ME

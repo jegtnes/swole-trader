@@ -9,7 +9,10 @@ class Set extends Component {
     {generateSets(this.props.weekNumber).map((val, i) => {
       return <li key={i}>
         <span className="lifts">{val}&nbsp;</span>
-        <span className="weight">{ round(this.props.orm * generateRepIntensity(this.props.weekNumber, i+1)) }kg</span>
+        <span className="weight">
+          {round(this.props.orm * generateRepIntensity(this.props.weekNumber, i+1))}
+          {this.props.unit}
+          </span>
       </li>
     })}
     </ol>
