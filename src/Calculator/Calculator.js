@@ -78,6 +78,7 @@ class Calculator extends Component {
     });
   };
 
+  // TODO: dear god so much repetition
   updateAndConvertUnit(event) {
     const currentState = this.state;
     const currentUnit = currentState.unit;
