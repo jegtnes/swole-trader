@@ -12,6 +12,8 @@ class Calculator extends Component {
 
   constructor(props) {
     super(props);
+    this.METRIC_TO_IMPERIAL = 2.20462;
+    this.IMPERIAL_TO_METRIC = 0.453592;
 
     this.state = {
       bench: false,
@@ -28,6 +30,7 @@ class Calculator extends Component {
     this.updateDeadlift = this.updateDeadlift.bind(this);
     this.updateOhp = this.updateOhp.bind(this);
     this.updateUnit = this.updateUnit.bind(this);
+    this.updateAndConvertUnit = this.updateAndConvertUnit.bind(this);
     this.updateState = this.updateState.bind(this);
     this.clearState = this.clearState.bind(this);
   }
@@ -73,6 +76,32 @@ class Calculator extends Component {
       unit: event.target.value,
       roundingFactor: event.target.value === 'kg' ? 2.5 : 5,
     });
+  };
+
+  updateAndConvertUnit(event) {
+    const currentState = this.state;
+    const currentUnit = currentState.unit;
+    const nextUnit = event.target.value;
+
+    if (currentUnit === 'kg' && nextUnit === 'lbs') {
+      this.setState({
+        unit: event.target.value,
+        roundingFactor: 5,
+        bench: currentState.bench * this.METRIC_TO_IMPERIAL,
+        deadlift: currentState.deadlift * this.METRIC_TO_IMPERIAL,
+        squats: currentState.squats * this.METRIC_TO_IMPERIAL,
+        ohp: currentState.ohp * this.METRIC_TO_IMPERIAL,
+      }, this.updateState);
+    } else {
+      this.setState({
+        unit: event.target.value,
+        roundingFactor: 2.5,
+        bench: currentState.bench * this.IMPERIAL_TO_METRIC,
+        deadlift: currentState.deadlift * this.IMPERIAL_TO_METRIC,
+        squats: currentState.squats * this.IMPERIAL_TO_METRIC,
+        ohp: currentState.ohp * this.IMPERIAL_TO_METRIC,
+      }, this.updateState);
+    }
   };
 
   updateState() {
@@ -187,6 +216,17 @@ class Calculator extends Component {
           </Tabs>
 
           <button onClick={this.clearState}>Reset gains pls!</button>
+          <fieldset>
+            <legend>Units of preference?</legend>
+            <label>
+              <span>Metric (kg)</span>
+              <input onChange={this.updateAndConvertUnit} id="unit-metric" name="unit" type="radio" value="kg" checked={this.state.unit === 'kg' } />
+            </label>
+            <label>
+              <span>Imperial (lbs)</span>
+              <input onChange={this.updateAndConvertUnit} id="unit-imperial" name="unit" type="radio" value="lbs" checked={this.state.unit === 'lbs' } />
+            </label>
+          </fieldset>
         </section>
         }
       </div>
