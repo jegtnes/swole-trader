@@ -12,7 +12,7 @@ class Set extends Component {
         <span className="weight">
           {round(this.props.orm * generateRepIntensity(this.props.weekNumber, i+1), this.props.roundingFactor ? this.props.roundingFactor : 2.5)}
           {this.props.unit}
-          </span>
+        </span>
       </li>
     })}
     </ol>
