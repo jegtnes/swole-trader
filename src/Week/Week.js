@@ -25,9 +25,7 @@ class Week extends Component {
         <hr />
         <div>
           <h2>Day 4: Overhead Press</h2>
-          <ol>
           <Set weekNumber={this.props.weekNumber} orm={this.props.ohp} unit={this.props.unit} roundingFactor={this.props.roundingFactor} />
-          </ol>
         </div>
         <hr />
       </div>
