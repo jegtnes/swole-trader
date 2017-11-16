@@ -20,6 +20,11 @@
 }
 
 .week .weight {
+  display: block;
   font-size: 1.5em;
   font-weight: 100;
+}
+
+.weight-distribution {
+  display: block;
 }
