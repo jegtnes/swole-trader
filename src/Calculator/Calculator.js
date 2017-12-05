@@ -33,6 +33,7 @@ class Calculator extends Component {
     this.updateAndConvertUnit = this.updateAndConvertUnit.bind(this);
     this.updateState = this.updateState.bind(this);
     this.clearState = this.clearState.bind(this);
+    this.increaseWeights = this.increaseWeights.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -113,6 +114,19 @@ class Calculator extends Component {
       LocalForage.getItem('data', (err, val) => {
         that.setState({submitted: true});
       });
+    });
+  };
+
+  increaseWeights() {
+    const modifier = this.state.unit === 'kg' ? 2.5 : 5;
+
+    this.setState({
+      bench: this.state.bench + modifier,
+      deadlift: this.state.deadlift + (modifier * 2),
+      squats: this.state.squats + (modifier * 2),
+      ohp: this.state.ohp + modifier,
+    }, () => {
+      LocalForage.setItem('data', this.state);
     });
   };
 
@@ -217,6 +231,7 @@ class Calculator extends Component {
           </Tabs>
 
           <button onClick={this.clearState}>Reset gains pls!</button>
+          <button onClick={this.increaseWeights}>More gains pls!</button>
           <fieldset>
             <legend>Units of preference?</legend>
             <label>
