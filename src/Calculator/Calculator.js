@@ -16,22 +16,22 @@ class Calculator extends Component {
     this.IMPERIAL_TO_METRIC = 0.453592;
 
     this.state = {
-      bench: false,
-      deadlift: false,
-      squats: false,
-      ohp: false,
+      bench: 0,
+      deadlift: 0,
+      squats: 0,
+      ohp: 0,
       submitted: false,
       unit: false,
       roundingFactor: false,
     }
 
+    this.submit = this.submit.bind(this);
     this.updateBench = this.updateBench.bind(this);
     this.updateSquats = this.updateSquats.bind(this);
     this.updateDeadlift = this.updateDeadlift.bind(this);
     this.updateOhp = this.updateOhp.bind(this);
-    this.updateUnit = this.updateUnit.bind(this);
     this.updateAndConvertUnit = this.updateAndConvertUnit.bind(this);
-    this.updateState = this.updateState.bind(this);
+    this.saveState = this.saveState.bind(this);
     this.clearState = this.clearState.bind(this);
     this.increaseWeights = this.increaseWeights.bind(this);
   }
@@ -55,6 +55,7 @@ class Calculator extends Component {
   };
 
   updateSquats(event) {
+    console.log(this.state.squats);
     this.setState({
       squats: event.target.value,
     });
@@ -72,13 +73,6 @@ class Calculator extends Component {
     });
   };
 
-  updateUnit(event) {
-    this.setState({
-      unit: event.target.value,
-      roundingFactor: event.target.value === 'kg' ? 2.5 : 5,
-    });
-  };
-
   // TODO: dear god so much repetition
   updateAndConvertUnit(event) {
     const currentState = this.state;
@@ -93,7 +87,7 @@ class Calculator extends Component {
         deadlift: currentState.deadlift * this.METRIC_TO_IMPERIAL,
         squats: currentState.squats * this.METRIC_TO_IMPERIAL,
         ohp: currentState.ohp * this.METRIC_TO_IMPERIAL,
-      }, this.updateState);
+      }, this.saveState);
     } else {
       this.setState({
         unit: event.target.value,
@@ -102,19 +96,18 @@ class Calculator extends Component {
         deadlift: currentState.deadlift * this.IMPERIAL_TO_METRIC,
         squats: currentState.squats * this.IMPERIAL_TO_METRIC,
         ohp: currentState.ohp * this.IMPERIAL_TO_METRIC,
-      }, this.updateState);
+      }, this.saveState);
     }
   };
 
-  updateState() {
-    const cheatingState = this.state;
-    const that = this;
-    cheatingState.submitted = true;
-    LocalForage.setItem('data', cheatingState, (err) => {
-      LocalForage.getItem('data', (err, val) => {
-        that.setState({submitted: true});
-      });
+  submit() {
+    this.setState({submitted: true}, () => {
+      this.saveState();
     });
+  };
+
+  saveState() {
+    LocalForage.setItem('data', this.state);
   };
 
   increaseWeights() {
@@ -134,12 +127,7 @@ class Calculator extends Component {
     const that = this;
     LocalForage.removeItem('data', (err) => {
       that.setState({
-        bench: false,
-        deadlift: false,
-        squats: false,
-        ohp: false,
-        submitted: false,
-        unit: false,
+        submitted: false
       });
     });
   };
@@ -151,37 +139,37 @@ class Calculator extends Component {
         <section>
           <label>
             <span>Squats 1RM</span>
-            <input onChange={this.updateSquats} min="1" max="300" type="number" id="orm-squat" />
+            <input value={this.state.squats} onChange={this.updateSquats} min="1" max="300" type="number" id="orm-squat" />
           </label>
 
           <label>
             <span>Bench Press 1RM</span>
-            <input onChange={this.updateBench} min="1" max="300" type="number" id="orm-deadlift" />
+            <input value={this.state.bench} onChange={this.updateBench} min="1" max="300" type="number" id="orm-deadlift" />
           </label>
 
           <label>
             <span>Deadlift 1RM</span>
-            <input onChange={this.updateDeadlift} min="1" max="300" type="number" id="orm-bench" />
+            <input value={this.state.deadlift} onChange={this.updateDeadlift} min="1" max="300" type="number" id="orm-bench" />
           </label>
 
           <label>
             <span>Overhead Press 1RM</span>
-            <input onChange={this.updateOhp} min="1" max="300" type="number" id="orm-ohp" />
+            <input value={this.state.ohp} onChange={this.updateOhp} min="1" max="300" type="number" id="orm-ohp" />
           </label>
 
           <fieldset>
             <legend>Units of preference?</legend>
             <label>
               <span>Metric (kg)</span>
-              <input onChange={this.updateUnit} id="unit-metric" name="unit" type="radio" value="kg" />
+              <input onChange={this.updateAndConvertUnit} id="unit-metric" name="unit" type="radio" value="kg" checked={this.state.unit === 'kg' } />
             </label>
             <label>
               <span>Imperial (lbs)</span>
-              <input onChange={this.updateUnit} id="unit-imperial" name="unit" type="radio" value="lbs" />
+              <input onChange={this.updateAndConvertUnit} id="unit-imperial" name="unit" type="radio" value="lbs" checked={this.state.unit === 'lbs' } />
             </label>
           </fieldset>
 
-          <button onClick={this.updateState}>
+          <button onClick={this.submit}>
             HIT ME WITH YOUR RHYTHM STICK. HIT ME, HIT ME
           </button>
         </section> :
