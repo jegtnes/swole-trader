@@ -50,26 +50,25 @@ class Calculator extends Component {
 
   updateBench(event) {
     this.setState({
-      bench: event.target.value,
+      bench: parseInt(event.target.value, 10),
     });
   };
 
   updateSquats(event) {
-    console.log(this.state.squats);
     this.setState({
-      squats: event.target.value,
+      squats: parseInt(event.target.value, 10),
     });
   };
 
   updateDeadlift(event) {
     this.setState({
-      deadlift: event.target.value,
+      deadlift: parseInt(event.target.value, 10),
     });
   };
 
   updateOhp(event) {
     this.setState({
-      ohp: event.target.value,
+      ohp: parseInt(event.target.value, 10),
     });
   };
 
@@ -133,6 +132,7 @@ class Calculator extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="calculator">
         { !this.state.submitted ?
