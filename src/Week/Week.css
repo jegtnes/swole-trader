@@ -1,20 +1,21 @@
 .week ol {
   padding: 0;
   list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-around;
-  text-align: center;
+  border-collapse: collapse;
 }
 
 .week li {
-  flex: 1 1 33.33%;
   padding: .5em;
+  display: flex;
+  border-top: 1px solid grey;
+  align-items: baseline;
+}
+
+.week li:last-of-type {
+  border-bottom: 1px solid grey;
 }
 
 .week .lifts {
-  display: block;
   font-weight: 900;
   font-size: 1.25em;
 }
@@ -26,5 +27,6 @@
 }
 
 .weight-distribution {
-  display: block;
+  flex-grow: 1;
+  text-align: right;
 }
