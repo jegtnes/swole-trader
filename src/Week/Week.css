@@ -1,12 +1,18 @@
-.week ol {
+.week__day {
+  margin: 3em 0;
   padding: 0;
   list-style-type: none;
   border-collapse: collapse;
 }
 
+.week__day ol {
+  padding-left: 0;
+}
+
 .week li {
   padding: .5em;
   display: flex;
+  flex-wrap: wrap;
   border-top: 1px solid grey;
   align-items: baseline;
 }
