@@ -47,6 +47,23 @@ class Rep extends Component {
       )
     );
 
+    let weightsDistribution = [];
+
+    if (this.props.unit === 'kg') {
+      weightsDistribution = this.recursive(
+        kgWeightSet,
+        parseFloat(((weight - kgBarWeight) / 2)),
+        []
+      )
+    } else if (this.props.unit === 'lbs') {
+      weightsDistribution = this.recursive(
+        lbWeightSet,
+        parseFloat(((weight - lbBarWeight) / 2)),
+        []
+      )
+    }
+    console.log(weightsDistribution);
+
     return (
       <li className='rep'>
         <span className='rep__item rep__item--lifts'>{this.props.liftNumber}&nbsp;</span>
@@ -54,17 +71,11 @@ class Rep extends Component {
           {weight}
           {this.props.unit}
         </span>
-        <span className='rep__item rep__item--weight-distribution'>{
-          this.props.unit === 'kg' ? this.calculateWeights(
-            kgWeightSet,
-            parseFloat(((weight - kgBarWeight) / 2)),
-            []
-          ) : this.calculateWeights(
-            lbWeightSet,
-            parseFloat(((weight - lbBarWeight) / 2)),
-            []
-          )
-        }/side</span>
+        <span className='rep__item rep__item--weight-distribution'>
+          {weightsDistribution.map((item) => {
+            return <span className='rep__item--weight-distribution__weight'>{item}</span>;
+          })}
+        </span>
       </li>
     )
   }

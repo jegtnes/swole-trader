@@ -24,6 +24,25 @@
 }
 
 .rep__item--weight-distribution {
-  flex-grow: 1;
-  text-align: right;
+  display: flex;
+  width: 100%;
+}
+
+.rep__item--weight-distribution__weight {
+  width: 2.5em;
+  height: 2.5em;
+  margin: .5em;
+  background-color: #333;
+  color: #fff;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 2.5em;
+}
+
+.rep__item--weight-distribution__weight:first-of-type {
+  margin-left: 0;
+}
+
+.rep__item--weight-distribution__weight:last-of-type {
+  margin-right: 0;
 }
