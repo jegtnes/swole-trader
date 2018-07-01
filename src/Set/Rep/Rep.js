@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 import { generateRepIntensity } from '../../services/weights';
 import { round } from '../../services/round';
 
+const kgWeightSet = [1.25, 2.5, 5, 10, 15, 20, 25, 30];
+const kgBarWeight = 20;
+
+const lbWeightSet = [1.25, 2.5, 5, 10, 25, 35, 45];
+const lbBarWeight = 45;
+
 class Rep extends Component {
   recursive(weights, totalWeight, previousResult) {
-    weights = weights.reverse();
-    if (totalWeight < 0) {
-
-      return previousResult;
-    }
-    if (totalWeight === 0) {
+    if (totalWeight <= 0) {
       return previousResult;
     }
 
@@ -26,9 +27,7 @@ class Rep extends Component {
 
     previousResult.push(biggestWeight);
 
-
-    return this.recursive(weights.reverse(), totalWeight - biggestWeight, previousResult);
-
+    return this.recursive(weights, totalWeight - biggestWeight, previousResult);
   }
 
   calculateWeights(weight, totalWeight, previousResult) {
@@ -54,10 +53,14 @@ class Rep extends Component {
           {this.props.unit}
         </span>
         <span className="weight-distribution">{
-          this.calculateWeights(
-              [1.25, 2.5, 5, 10, 15, 20, 25, 30].reverse(),
-              parseFloat(((weight - 20) / 2)),
-              []
+          this.props.unit === 'kg' ? this.calculateWeights(
+            kgWeightSet,
+            parseFloat(((weight - kgBarWeight) / 2)),
+            []
+          ) : this.calculateWeights(
+            lbWeightSet,
+            parseFloat(((weight - lbBarWeight) / 2)),
+            []
           )
         }/side</span>
       </li>
