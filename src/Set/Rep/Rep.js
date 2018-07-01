@@ -5,12 +5,6 @@ import { round } from '../../services/round';
 
 import './Rep.css';
 
-const kgWeightSet = [1.25, 2.5, 5, 10, 15, 20, 25, 30];
-const kgBarWeight = 20;
-
-const lbWeightSet = [1.25, 2.5, 5, 10, 25, 35, 45];
-const lbBarWeight = 45;
-
 class Rep extends Component {
   recursive(weights, totalWeight, previousResult) {
     if (totalWeight <= 0) {
@@ -47,22 +41,17 @@ class Rep extends Component {
       )
     );
 
-    let weightsDistribution = [];
+    const weightSet = this.props.unit === 'kg' ?
+      [1.25, 2.5, 5, 10, 15, 20, 25, 30] :
+      [1.25, 2.5, 5, 10, 25, 35, 45];
 
-    if (this.props.unit === 'kg') {
-      weightsDistribution = this.recursive(
-        kgWeightSet,
-        parseFloat(((weight - kgBarWeight) / 2)),
-        []
-      )
-    } else if (this.props.unit === 'lbs') {
-      weightsDistribution = this.recursive(
-        lbWeightSet,
-        parseFloat(((weight - lbBarWeight) / 2)),
-        []
-      )
-    }
-    console.log(weightsDistribution);
+    const barWeight = this.props.unit === 'kg' ? 20 : 45;
+
+    const weightsDistribution = this.recursive(
+      weightSet,
+      parseFloat(((weight - barWeight) / 2)),
+      []
+    );
 
     return (
       <li className='rep'>
