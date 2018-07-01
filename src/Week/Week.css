@@ -1,5 +1,5 @@
 .week__day {
-  margin: 3em 0;
+  margin: 2em 0;
   padding: 0;
   list-style-type: none;
   border-collapse: collapse;
@@ -7,32 +7,4 @@
 
 .week__day ol {
   padding-left: 0;
-}
-
-.week li {
-  padding: .5em;
-  display: flex;
-  flex-wrap: wrap;
-  border-top: 1px solid grey;
-  align-items: baseline;
-}
-
-.week li:last-of-type {
-  border-bottom: 1px solid grey;
-}
-
-.week .lifts {
-  font-weight: 900;
-  font-size: 1.25em;
-}
-
-.week .weight {
-  display: block;
-  font-size: 1.5em;
-  font-weight: 100;
-}
-
-.weight-distribution {
-  flex-grow: 1;
-  text-align: right;
 }

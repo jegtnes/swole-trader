@@ -6,7 +6,7 @@ import Rep from './Rep/Rep.js';
 
 class Set extends Component {
   render() { return (
-    <ol>
+    <ol className='set'>
     {generateSets(this.props.weekNumber).map((val, i) => {
       const repKey = `${this.props.weekNumber}/${this.props.day+1}/${i+1}`;
 

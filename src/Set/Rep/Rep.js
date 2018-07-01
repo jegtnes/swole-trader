@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { generateRepIntensity } from '../../services/weights';
 import { round } from '../../services/round';
 
+import './Rep.css';
+
 const kgWeightSet = [1.25, 2.5, 5, 10, 15, 20, 25, 30];
 const kgBarWeight = 20;
 
@@ -46,13 +48,13 @@ class Rep extends Component {
     );
 
     return (
-      <li>
-        <span className="lifts">{this.props.liftNumber}&nbsp;</span>
-        <span className="weight">
+      <li className='rep'>
+        <span className='rep__item rep__item--lifts'>{this.props.liftNumber}&nbsp;</span>
+        <span className='rep__item rep__item--unit'>
           {weight}
           {this.props.unit}
         </span>
-        <span className="weight-distribution">{
+        <span className='rep__item rep__item--weight-distribution'>{
           this.props.unit === 'kg' ? this.calculateWeights(
             kgWeightSet,
             parseFloat(((weight - kgBarWeight) / 2)),
