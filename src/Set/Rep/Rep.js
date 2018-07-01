@@ -61,8 +61,8 @@ class Rep extends Component {
           {this.props.unit}
         </span>
         <span className='rep__item rep__item--weight-distribution'>
-          {weightsDistribution.map((item) => {
-            return <span className='rep__item--weight-distribution__weight'>{item}</span>;
+          {weightsDistribution.map((item, i) => {
+            return <span key={i} className='rep__item--weight-distribution__weight'>{item}</span>;
           })}
         </span>
       </li>
