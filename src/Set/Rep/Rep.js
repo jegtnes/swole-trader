@@ -62,7 +62,20 @@ class Rep extends Component {
         </span>
         <span className='rep__item rep__item--weight-distribution'>
           {weightsDistribution.map((item, i) => {
-            return <span key={i} className='rep__item--weight-distribution__weight'>{item}</span>;
+            // determine the percentile of how physically large the weight is going to be
+            // for styling purposes
+            const relativeWeightSize = (weightSet.indexOf(item) / weightSet.length) * 100;
+
+            let className = 'rep__item--weight-distribution__weight ';
+            if (relativeWeightSize <= 25) {
+              className += 'rep__item--weight-distribution__weight--small'
+            } else if (relativeWeightSize <= 50) {
+              className += 'rep__item--weight-distribution__weight--medium'
+            } else {
+              className += 'rep__item--weight-distribution__weight--large'
+            }
+
+            return <span key={i} className={className}>{item}</span>;
           })}
         </span>
       </li>

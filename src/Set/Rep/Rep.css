@@ -26,6 +26,7 @@
 .rep__item--weight-distribution {
   display: flex;
   width: 100%;
+  align-items: center;
 }
 
 .rep__item--weight-distribution__weight {
@@ -45,4 +46,12 @@
 
 .rep__item--weight-distribution__weight:last-of-type {
   margin-right: 0;
+}
+
+.rep__item--weight-distribution__weight--small {
+  font-size: .75em;
+}
+
+.rep__item--weight-distribution__weight--large {
+  font-size: 1.25em;
 }
