@@ -26,12 +26,6 @@ class Rep extends Component {
     return this.recursive(weights, totalWeight - biggestWeight, previousResult);
   }
 
-  calculateWeights(weight, totalWeight, previousResult) {
-    var weights = this.recursive(weight, totalWeight, previousResult);
-    weights = weights.join('+');
-    return weights;
-  }
-
   render() {
     const weight = round(
       this.props.orm * generateRepIntensity(
