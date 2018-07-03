@@ -58,4 +58,25 @@ function generateSets(weekNumber) {
   return sets;
 }
 
-export { generateRepIntensity, generateSets }
+function generateWeightDistribution(weights, totalWeight, previousResult) {
+  // exit condition
+  if (totalWeight <= 0) {
+    return previousResult;
+  }
+
+  var biggestWeight = 0;
+
+  for(var i = 0; i < weights.length; i++) {
+    if (weights[i] <= totalWeight) {
+      biggestWeight = weights[i];
+    }
+  }
+
+  if (biggestWeight === 0) return previousResult;
+
+  previousResult.push(biggestWeight);
+
+  return generateWeightDistribution(weights, totalWeight - biggestWeight, previousResult);
+}
+
+export { generateRepIntensity, generateSets, generateWeightDistribution }

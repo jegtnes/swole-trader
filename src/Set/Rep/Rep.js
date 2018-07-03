@@ -1,31 +1,11 @@
 import React, { Component } from 'react';
 
-import { generateRepIntensity } from '../../services/weights';
+import { generateRepIntensity, generateWeightDistribution } from '../../services/weights';
 import { round } from '../../services/round';
 
 import './Rep.css';
 
 class Rep extends Component {
-  recursive(weights, totalWeight, previousResult) {
-    if (totalWeight <= 0) {
-      return previousResult;
-    }
-
-    var biggestWeight = 0;
-
-    for(var i = 0; i < weights.length; i++) {
-      if (weights[i] <= totalWeight) {
-        biggestWeight = weights[i];
-      }
-    }
-
-    if (biggestWeight === 0) return previousResult;
-
-    previousResult.push(biggestWeight);
-
-    return this.recursive(weights, totalWeight - biggestWeight, previousResult);
-  }
-
   render() {
     const weight = round(
       this.props.orm * generateRepIntensity(
@@ -41,7 +21,7 @@ class Rep extends Component {
 
     const barWeight = this.props.unit === 'kg' ? 20 : 45;
 
-    const weightsDistribution = this.recursive(
+    const weightsDistribution = generateWeightDistribution(
       weightSet,
       parseFloat(((weight - barWeight) / 2)),
       []
