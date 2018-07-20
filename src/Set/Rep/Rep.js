@@ -7,13 +7,11 @@ import './Rep.css';
 
 class Rep extends Component {
   render() {
-    const weight = round(
-      this.props.orm * generateRepIntensity(
-        this.props.weekNumber,
-        this.props.setNumber,
-        this.props.roundingFactor ? this.props.roundingFactor : 2.5,
-      )
+    const repIntensity = generateRepIntensity(
+      this.props.weekNumber,
+      this.props.setNumber,
     );
+    const weight = round(this.props.orm * repIntensity);
 
     const weightSet = this.props.unit === 'kg' ?
       [1.25, 2.5, 5, 10, 15, 20, 25, 30] :
