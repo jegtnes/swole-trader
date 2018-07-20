@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Week from '../Week/Week';
 import LocalForage from 'localforage';
+import { round } from '../services/round';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
@@ -22,7 +23,7 @@ class Calculator extends Component {
       ohp: 0,
       submitted: false,
       unit: false,
-      roundingFactor: false,
+      roundingFactor: 0,
     }
 
     this.submit = this.submit.bind(this);
@@ -50,25 +51,25 @@ class Calculator extends Component {
 
   updateBench(event) {
     this.setState({
-      bench: parseInt(event.target.value, 10),
+      bench: parseFloat(event.target.value, 10),
     });
   };
 
   updateSquats(event) {
     this.setState({
-      squats: parseInt(event.target.value, 10),
+      squats: parseFloat(event.target.value, 10),
     });
   };
 
   updateDeadlift(event) {
     this.setState({
-      deadlift: parseInt(event.target.value, 10),
+      deadlift: parseFloat(event.target.value, 10),
     });
   };
 
   updateOhp(event) {
     this.setState({
-      ohp: parseInt(event.target.value, 10),
+      ohp: parseFloat(event.target.value, 10),
     });
   };
 
@@ -82,19 +83,19 @@ class Calculator extends Component {
       this.setState({
         unit: event.target.value,
         roundingFactor: 5,
-        bench: currentState.bench * this.METRIC_TO_IMPERIAL,
-        deadlift: currentState.deadlift * this.METRIC_TO_IMPERIAL,
-        squats: currentState.squats * this.METRIC_TO_IMPERIAL,
-        ohp: currentState.ohp * this.METRIC_TO_IMPERIAL,
+        bench: round(currentState.bench * this.METRIC_TO_IMPERIAL, 5),
+        deadlift: round(currentState.deadlift * this.METRIC_TO_IMPERIAL, 5),
+        squats: round(currentState.squats * this.METRIC_TO_IMPERIAL, 5),
+        ohp: round(currentState.ohp * this.METRIC_TO_IMPERIAL, 5),
       }, this.saveState);
     } else {
       this.setState({
         unit: event.target.value,
         roundingFactor: 2.5,
-        bench: currentState.bench * this.IMPERIAL_TO_METRIC,
-        deadlift: currentState.deadlift * this.IMPERIAL_TO_METRIC,
-        squats: currentState.squats * this.IMPERIAL_TO_METRIC,
-        ohp: currentState.ohp * this.IMPERIAL_TO_METRIC,
+        bench: round(currentState.bench * this.IMPERIAL_TO_METRIC, 2.5),
+        deadlift: round(currentState.deadlift * this.IMPERIAL_TO_METRIC, 2.5),
+        squats: round(currentState.squats * this.IMPERIAL_TO_METRIC, 2.5),
+        ohp: round(currentState.ohp * this.IMPERIAL_TO_METRIC, 2.5),
       }, this.saveState);
     }
   };
@@ -139,22 +140,22 @@ class Calculator extends Component {
         <section>
           <label>
             <span>Squats 1RM</span>
-            <input value={this.state.squats} onChange={this.updateSquats} min="1" max="300" type="number" id="orm-squat" />
+            <input value={this.state.squats} onChange={this.updateSquats} min={this.state.roundingFactor} step={this.state.roundingFactor} max="300.0" type="number" id="orm-squat" />
           </label>
 
           <label>
             <span>Bench Press 1RM</span>
-            <input value={this.state.bench} onChange={this.updateBench} min="1" max="300" type="number" id="orm-deadlift" />
+            <input value={this.state.bench} onChange={this.updateBench} min={this.state.roundingFactor} step={this.state.roundingFactor} max="300.0" type="number" id="orm-deadlift" />
           </label>
 
           <label>
             <span>Deadlift 1RM</span>
-            <input value={this.state.deadlift} onChange={this.updateDeadlift} min="1" max="300" type="number" id="orm-bench" />
+            <input value={this.state.deadlift} onChange={this.updateDeadlift} min={this.state.roundingFactor} step={this.state.roundingFactor} max="300.0" type="number" id="orm-bench" />
           </label>
 
           <label>
             <span>Overhead Press 1RM</span>
-            <input value={this.state.ohp} onChange={this.updateOhp} min="1" max="300" type="number" id="orm-ohp" />
+            <input value={this.state.ohp} onChange={this.updateOhp} min={this.state.roundingFactor} step={this.state.roundingFactor} max="300.0" type="number" id="orm-ohp" />
           </label>
 
           <fieldset>
