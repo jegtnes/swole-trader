@@ -2,7 +2,7 @@
   "name": "swole-trader",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://static.jegtnes.co.uk/swoletrader",
+  "homepage": "https://swole.website",
   "dependencies": {
     "jest-cli": "^21.0.1",
     "localforage": "^1.5.0",
