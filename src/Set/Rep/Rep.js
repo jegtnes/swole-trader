@@ -14,7 +14,7 @@ class Rep extends Component {
     const weight = round(this.props.orm * repIntensity);
 
     const weightSet = this.props.unit === 'kg' ?
-      [1.25, 2.5, 5, 10, 15, 20, 25, 30] :
+      [1.25, 2.5, 5, 10, 15, 20, 25] :
       [1.25, 2.5, 5, 10, 25, 35, 45];
 
     const barWeight = this.props.unit === 'kg' ? 20 : 45;
