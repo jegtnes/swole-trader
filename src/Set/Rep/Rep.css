@@ -7,6 +7,10 @@
   align-items: baseline;
 }
 
+.rep--completed {
+  background: red;
+}
+
 .rep:last-of-type {
   border-bottom: 1px solid grey;
 }

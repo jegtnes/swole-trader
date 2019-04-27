@@ -1,4 +1,4 @@
-import { generateRepIntensity, generateSets } from './weights';
+import { generateRepIntensity, generateSets, generateWeightDistribution } from './weights';
 
 describe('generateRepIntensity', () => {
   it('fails if not passed the correct parameters', () => {
@@ -82,3 +82,5 @@ describe('generateSets', () => {
     expect(generateSets(4)).toEqual(['5x', '5x', '5x']);
   });
 })
+
+// TODO: tests for weight distribution

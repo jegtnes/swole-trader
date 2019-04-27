@@ -26,7 +26,7 @@ class Rep extends Component {
     );
 
     return (
-      <li className='rep'>
+      <div>
         <span className='rep__item rep__item--lifts'>{this.props.liftNumber}&nbsp;</span>
         <span className='rep__item rep__item--unit'>
           {weight}
@@ -50,7 +50,7 @@ class Rep extends Component {
             return <span key={i} className={className}>{item}</span>;
           })}
         </span>
-      </li>
+      </div>
     )
   }
 }

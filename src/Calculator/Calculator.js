@@ -24,8 +24,10 @@ class Calculator extends Component {
       submitted: false,
       unit: false,
       roundingFactor: 0,
+      completedSets: [],
     }
 
+    this.handleRepClick = this.handleRepClick.bind(this);
     this.submit = this.submit.bind(this);
     this.updateBench = this.updateBench.bind(this);
     this.updateSquats = this.updateSquats.bind(this);
@@ -46,6 +48,7 @@ class Calculator extends Component {
       submitted: nextProps.submitted ? nextProps.submitted : false,
       unit: nextProps.unit ? nextProps.unit : false,
       roundingFactor: nextProps.roundingFactor ? nextProps.roundingFactor : false,
+      completedSets: nextProps.completedSets ? nextProps.completedSets : false,
     });
   }
 
@@ -72,6 +75,21 @@ class Calculator extends Component {
       ohp: parseFloat(event.target.value, 10),
     });
   };
+
+  handleRepClick(rep) {
+    const completedSets = this.state.completedSets;
+    if(completedSets && completedSets.find((i) => i === rep)) {
+      const newCompletedSets = completedSets.filter((i) => i !== rep);
+      this.setState({
+        completedSets: newCompletedSets,
+      }, this.saveState)
+    } else {
+      completedSets.push(rep);
+      this.setState({
+        completedSets: completedSets,
+      }, this.saveState)
+    }
+  }
 
   // TODO: dear god so much repetition
   updateAndConvertUnit(event) {
@@ -133,7 +151,6 @@ class Calculator extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className="calculator">
         { !this.state.submitted ?
@@ -203,19 +220,19 @@ class Calculator extends Component {
             </TabList>
 
             <TabPanel className='tabs__panel'>
-              <Week weekNumber={1} {...this.state} />
+              <Week weekNumber={1} handleRepClick={this.handleRepClick} {...this.state} />
             </TabPanel>
 
             <TabPanel className='tabs__panel'>
-              <Week weekNumber={2} {...this.state} />
+              <Week weekNumber={2} handleRepClick={this.handleRepClick} {...this.state} />
             </TabPanel>
 
             <TabPanel className='tabs__panel'>
-              <Week weekNumber={3} {...this.state} />
+              <Week weekNumber={3} handleRepClick={this.handleRepClick} {...this.state} />
             </TabPanel>
 
             <TabPanel className='tabs__panel'>
-              <Week weekNumber={4} {...this.state} />
+              <Week weekNumber={4} handleRepClick={this.handleRepClick} {...this.state} />
             </TabPanel>
           </Tabs>
 
